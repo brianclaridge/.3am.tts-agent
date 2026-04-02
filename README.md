@@ -17,11 +17,56 @@ Add the hooks to your `.claude/settings.json`:
 ```json
 {
   "hooks": {
-    "SessionStart": [{ "hooks": [{ "type": "command", "command": "cd \"$CLAUDE_PROJECT_DIR/.claude/tts-agent\" && uv run src/notify.py" }] }],
-    "SessionEnd": [{ "hooks": [{ "type": "command", "command": "cd \"$CLAUDE_PROJECT_DIR/.claude/tts-agent\" && uv run src/notify.py" }] }],
-    "Stop": [{ "hooks": [{ "type": "command", "command": "cd \"$CLAUDE_PROJECT_DIR/.claude/tts-agent\" && uv run src/notify.py" }] }],
-    "Notification": [{ "hooks": [{ "type": "command", "command": "cd \"$CLAUDE_PROJECT_DIR/.claude/tts-agent\" && uv run src/notify.py" }] }],
-    "TaskCompleted": [{ "hooks": [{ "type": "command", "command": "cd \"$CLAUDE_PROJECT_DIR/.claude/tts-agent\" && uv run src/notify.py" }] }]
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd \"$CLAUDE_PROJECT_DIR/.claude/tts-agent\" && uv run src/notify.py"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd \"$CLAUDE_PROJECT_DIR/.claude/tts-agent\" && uv run src/notify.py"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd \"$CLAUDE_PROJECT_DIR/.claude/tts-agent\" && uv run src/notify.py"
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd \"$CLAUDE_PROJECT_DIR/.claude/tts-agent\" && uv run src/notify.py"
+          }
+        ]
+      }
+    ],
+    "TaskCompleted": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd \"$CLAUDE_PROJECT_DIR/.claude/tts-agent\" && uv run src/notify.py"
+          }
+        ]
+      }
+    ]
   }
 }
 ```
@@ -54,7 +99,7 @@ Per-platform TTS settings — voice name, rate, volume:
 ```yaml
 voice:
   windows:
-    name: zira          # or use voice_aliases
+    name: zira # or use voice_aliases
     rate: 0
     volume: 100
   macos:
@@ -90,11 +135,11 @@ events:
 
 ## Platforms
 
-| Platform | Beeps | TTS Engine |
-|---|---|---|
-| Windows | `winsound.Beep()` | SAPI COM via comtypes |
-| macOS | Terminal bell | `say` command |
-| Linux | Terminal bell | `spd-say` or `espeak` |
+| Platform | Beeps             | TTS Engine            |
+| -------- | ----------------- | --------------------- |
+| Windows  | `winsound.Beep()` | SAPI COM via comtypes |
+| macOS    | Terminal bell     | `say` command         |
+| Linux    | Terminal bell     | `spd-say` or `espeak` |
 
 ## Test
 
