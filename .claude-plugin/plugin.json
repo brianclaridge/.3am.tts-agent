@@ -1,0 +1,10 @@
+{
+  "name": "tts-agent",
+  "version": "0.1.0",
+  "description": "Cross-platform TTS notifications and audio cues for all 25 Claude Code hook events",
+  "author": {
+    "name": "Brian Claridge"
+  },
+  "license": "MIT",
+  "keywords": ["tts", "hooks", "notifications", "audio", "speech"]
+}

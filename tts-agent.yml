@@ -1,0 +1,205 @@
+log_path: ".data/logs/{session_id}/{stamp}.log"
+log_format: "{time} | {level} | {message}"
+
+voice_aliases:
+  david: "Microsoft David Desktop"
+  zira: "Microsoft Zira Desktop"
+
+voice:
+  windows:
+    name: zira
+    rate: 0
+    volume: 100
+  macos:
+    name: null
+    rate: 200
+  linux:
+    rate: null
+
+beeps:
+  heartbeat:
+    sequence: [[100, 20], [100, 20]]
+  tick:
+    sequence: [[200, 45]]
+  knock:
+    sequence: [[350, 50], [400, 70]]
+  soft-resolve:
+    sequence: [[450, 80], [380, 100]]
+  chime:
+    sequence: [[500, 80], [600, 60], [550, 90]]
+  bell:
+    sequence: [[600, 100], [650, 60], [600, 80]]
+  rising-chord:
+    sequence: [[400, 60], [500, 60], [600, 80]]
+  falling-chord:
+    sequence: [[600, 60], [500, 60], [400, 80]]
+  step-up:
+    sequence: [[500, 80], [700, 80]]
+  step-down:
+    sequence: [[700, 80], [500, 80]]
+  ping:
+    sequence: [[750, 80], [800, 60], [750, 70]]
+  doorbell:
+    sequence: [[800, 120], [600, 150]]
+  warning-hum:
+    sequence: [[300, 150], [350, 100], [400, 80]]
+
+events:
+  # --- Session lifecycle ---
+
+  SessionStart:
+    variant_key: source
+    beep: rising-chord
+    variants:
+      startup: { mode: tts, message: "Session started." }
+      resume: { mode: tts, message: "Welcome back." }
+      clear: { mode: sound }
+      compact: { mode: sound }
+    default: { mode: sound }
+
+  SessionEnd:
+    mode: tts
+    beep: falling-chord
+    message: "Session ended. See you later."
+    detach: true
+
+  InstructionsLoaded:
+    mode: sound
+    beep: heartbeat
+
+  ConfigChange:
+    mode: both
+    beep: chime
+    message: "Configuration changed."
+
+  # --- User interaction ---
+
+  UserPromptSubmit:
+    mode: sound
+    beep: tick
+
+  Stop:
+    mode: sound
+    beep: knock
+
+  StopFailure:
+    mode: both
+    beep: warning-hum
+    message: "Turn ended with an error."
+
+  Notification:
+    variant_key: notification_type
+    beep: doorbell
+    variants:
+      permission_prompt: { mode: both, message: "Claude needs your permission." }
+      elicitation_dialog: { mode: both, message: "Claude has a question for you." }
+    default: { mode: sound }
+
+  # --- Tool lifecycle ---
+
+  PreToolUse:
+    mode: sound
+    beep: tick
+
+  PostToolUse:
+    mode: sound
+    beep: heartbeat
+
+  PostToolUseFailure:
+    mode: sound
+    beep: warning-hum
+    message: "Tool failed."
+    template: "{tool_name} failed."
+    template_field: tool_name
+    skip_on_interrupt: true
+
+  PermissionRequest:
+    mode: both
+    beep: doorbell
+    message: "Permission requested."
+
+  # --- Task lifecycle ---
+
+  TaskCreated:
+    mode: sound
+    beep: chime
+
+  TaskCompleted:
+    mode: both
+    beep: bell
+    message: "Task complete."
+    template: "Completed: {task_subject}"
+    template_field: task_subject
+
+  # --- Agent lifecycle ---
+
+  SubagentStart:
+    mode: both
+    beep: step-up
+    message: "Agent spinning up."
+    template: "{agent_type} starting."
+    template_field: agent_type
+
+  SubagentStop:
+    mode: sound
+    beep: step-down
+
+  TeammateIdle:
+    mode: both
+    beep: ping
+    message: "Teammate going idle."
+    template: "{teammate_name} going idle."
+    template_field: teammate_name
+
+  # --- MCP / Elicitation ---
+
+  Elicitation:
+    mode: both
+    beep: doorbell
+    message: "Input needed."
+    template: "{server_name} needs your input."
+    template_field: server_name
+
+  ElicitationResult:
+    mode: sound
+    beep: soft-resolve
+
+  # --- File / Directory ---
+
+  CwdChanged:
+    mode: sound
+    beep: tick
+
+  FileChanged:
+    mode: sound
+    beep: chime
+
+  # --- Context compaction ---
+
+  PreCompact:
+    variant_key: trigger
+    beep: knock
+    variants:
+      auto: { mode: tts, message: "Context is compacting." }
+      manual: { mode: tts, message: "Compacting context now." }
+    default: { mode: tts, message: "Context compacting." }
+
+  PostCompact:
+    variant_key: trigger
+    beep: knock
+    variants:
+      auto: { mode: tts, message: "Context compacted." }
+      manual: { mode: tts, message: "Context compacted." }
+    default: { mode: tts, message: "Context compacted." }
+
+  # --- Worktree ---
+
+  WorktreeCreate:
+    mode: both
+    beep: chime
+    message: "Worktree created."
+
+  WorktreeRemove:
+    mode: both
+    beep: chime
+    message: "Worktree removed."

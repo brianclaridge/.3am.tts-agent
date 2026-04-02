@@ -1,0 +1,17 @@
+{
+  "name": "3am.bot",
+  "owner": {
+    "name": "Brian Claridge"
+  },
+  "metadata": {
+    "description": "Cross-platform TTS notifications and audio cues for Claude Code"
+  },
+  "plugins": [
+    {
+      "name": "tts-agent",
+      "source": ".",
+      "description": "Cross-platform TTS notifications and audio cues for all 25 Claude Code hook events",
+      "version": "0.1.0"
+    }
+  ]
+}
