@@ -12,74 +12,14 @@ Cross-platform TTS notifications and audio cues for all 25 Claude Code hook even
 git submodule add https://github.com/brianclaridge/.3am.tts-agent .claude/tts-agent
 ```
 
-Add the hooks to your `.claude/settings.json`:
-
-```json
-{
-  "hooks": {
-    "SessionStart": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "cd \"$CLAUDE_PROJECT_DIR/.claude/tts-agent\" && uv run src/notify.py"
-          }
-        ]
-      }
-    ],
-    "SessionEnd": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "cd \"$CLAUDE_PROJECT_DIR/.claude/tts-agent\" && uv run src/notify.py"
-          }
-        ]
-      }
-    ],
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "cd \"$CLAUDE_PROJECT_DIR/.claude/tts-agent\" && uv run src/notify.py"
-          }
-        ]
-      }
-    ],
-    "Notification": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "cd \"$CLAUDE_PROJECT_DIR/.claude/tts-agent\" && uv run src/notify.py"
-          }
-        ]
-      }
-    ],
-    "TaskCompleted": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "cd \"$CLAUDE_PROJECT_DIR/.claude/tts-agent\" && uv run src/notify.py"
-          }
-        ]
-      }
-    ]
-  }
-}
-```
-
-See `.claude/settings.json` in this repo for the full list of all 25 events.
+Hooks auto-register via `hooks/hooks.json` — no manual settings.json edits needed.
 
 ### Option B: Standalone clone
 
 ```bash
 git clone https://github.com/brianclaridge/.3am.tts-agent /path/to/tts-agent
+claude --plugin-dir /path/to/tts-agent
 ```
-
-Add hooks to your `settings.json` pointing to the clone path.
 
 ### Option C: GitHub marketplace
 
