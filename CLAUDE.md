@@ -21,7 +21,7 @@ src/
 3. Resolves event config via variant matching from `tts-agent.yml`
 4. Plays beep (if mode includes `sound`)
 5. Speaks message (if mode includes `tts`)
-6. Logs to `.data/logs/`
+6. Logs to `~/.claude/plugins/.3am-tts-agent/`
 
 ## Config
 

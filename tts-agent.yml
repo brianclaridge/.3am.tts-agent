@@ -1,4 +1,4 @@
-log_path: ".data/logs/{session_id}/{stamp}.log"
+log_path: "~/.claude/plugins/.3am-tts-agent/{session_id}/{stamp}.log"
 log_format: "{time} | {level} | {message}"
 
 voice_aliases:
