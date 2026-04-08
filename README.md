@@ -79,7 +79,7 @@ events:
 | -------- | ----------------- | --------------------- |
 | Windows  | `winsound.Beep()` | SAPI COM via comtypes |
 | macOS    | Terminal bell     | `say` command         |
-| Linux    | Terminal bell     | `spd-say` or `espeak` |
+| Linux    | Terminal bell     | `espeak-ng`           |
 
 ## Test
 

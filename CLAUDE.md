@@ -9,7 +9,7 @@ src/
   notify.py      # Entry point: stdin JSON -> event config -> beep/speak
   config.py      # YAML config loader (tts-agent.yml at repo root)
   sounds.py      # Beep module (winsound on Windows, terminal bell elsewhere)
-  tts.py         # Cross-platform TTS (SAPI COM, say, spd-say/espeak)
+  tts.py         # Cross-platform TTS (SAPI COM, say, espeak-ng)
   resolve.py     # Path resolution utility
   log_config.py  # Loguru logger setup
 ```

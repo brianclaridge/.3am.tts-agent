@@ -1,4 +1,4 @@
-"""Cross-platform TTS — SAPI COM (Windows), say (macOS), spd-say/espeak (Linux)."""
+"""Cross-platform TTS — SAPI COM (Windows), say (macOS), espeak-ng (Linux)."""
 from __future__ import annotations
 
 import platform
@@ -88,20 +88,18 @@ def _speak_linux(text: str, *, detach: bool = False) -> None:
     cfg = get_voice_config().get("linux", {})
     rate = cfg.get("rate")
 
-    commands = [["spd-say", text], ["espeak", text]]
+    cmd = ["espeak-ng"]
     if rate:
-        commands = [["spd-say", "-r", str(rate), text], ["espeak", "-s", str(rate), text]]
+        cmd.extend(["-s", str(rate)])
+    cmd.append(text)
 
-    for cmd in commands:
-        try:
-            if detach:
-                subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
-            else:
-                subprocess.run(cmd, capture_output=True, timeout=30)
-            return
-        except FileNotFoundError:
-            continue
-    print("tts: no engine found (tried spd-say, espeak)", file=sys.stderr)
+    try:
+        if detach:
+            subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
+        else:
+            subprocess.run(cmd, capture_output=True, timeout=30)
+    except FileNotFoundError:
+        print("tts: espeak-ng not found on PATH", file=sys.stderr)
 
 
 if __name__ == "__main__":
