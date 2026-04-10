@@ -9,7 +9,7 @@ Cross-platform TTS notifications and audio cues for all 25 Claude Code hook even
 ### Option A: Git submodule (recommended)
 
 ```bash
-git submodule add https://github.com/brianclaridge/.3am.tts-agent .claude/tts-agent
+git submodule add https://github.com/brianclaridge/.3am.tts-agent .claude/plugins/brianclaridge/.3am.tts-agent
 ```
 
 Hooks auto-register via `hooks/hooks.json` — no manual settings.json edits needed.
